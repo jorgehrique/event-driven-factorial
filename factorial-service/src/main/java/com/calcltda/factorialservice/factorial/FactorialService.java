@@ -21,7 +21,7 @@ public class FactorialService {
 
     public Mono<FactorialDTO> createFactorialRequest(FactorialDTO factorialDTO){
         return factorialRepository
-                .save(Factorial.fromDTO(factorialDTO))
+                .save(Factorial.newFactorial(factorialDTO))
                 .map(FactorialDTO::fromFactorial)
                 .doOnNext(f -> rabbitTemplate.convertAndSend("amq.direct", "factorial", f))
                 .doOnSuccess(factorial -> log.info("Created: {}", factorial))

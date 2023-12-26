@@ -11,7 +11,6 @@ import java.math.BigInteger;
 public class FactorialConsumer {
 
     private final Logger log = LoggerFactory.getLogger(FactorialConsumer.class);
-
     private final FactorialService factorialService;
 
     public FactorialConsumer(FactorialService factorialService) {
@@ -20,9 +19,9 @@ public class FactorialConsumer {
 
     @RabbitListener(queues = "factorial-queue")
     void consumer(FactorialDTO factorialDTO){
-        log.info("Consumed: {}", factorialDTO);
+        log.info("Initiating processing: {}", factorialDTO);
         BigInteger result = factorialService.calculateFactorial(factorialDTO.number());
-        log.info("Factorial of {} is: {}.", factorialDTO.number(), result);
+        log.info("Finalized processing {}: {}.", factorialDTO.number(), result);
     }
 
 }
