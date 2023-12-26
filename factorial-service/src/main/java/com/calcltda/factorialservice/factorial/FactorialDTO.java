@@ -1,7 +1,13 @@
 package com.calcltda.factorialservice.factorial;
 
 public record FactorialDTO(
-        String id,
+        long id,
         long number
 ) {
+    public static FactorialDTO fromFactorial(Factorial factorial){
+        return new FactorialDTO(
+                factorial.id(),
+                factorial.number()
+        );
+    }
 }

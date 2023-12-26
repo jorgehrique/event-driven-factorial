@@ -1,5 +1,6 @@
 package com.calcltda.factorialservice.factorial;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -14,6 +15,7 @@ public class FactorialEndpoint {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Mono<FactorialDTO> createFactorialRequest(@RequestBody FactorialDTO factorialDTO){
         return factorialService.createFactorialRequest(factorialDTO);
     }

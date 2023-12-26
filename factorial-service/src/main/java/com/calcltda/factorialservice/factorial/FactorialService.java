@@ -10,12 +10,24 @@ public class FactorialService {
 
     private final Logger log = LoggerFactory.getLogger(FactorialService.class);
 
+    private final FactorialRepository factorialRepository;
+
+    public FactorialService(FactorialRepository factorialRepository) {
+        this.factorialRepository = factorialRepository;
+    }
+
     public Mono<FactorialDTO> createFactorialRequest(FactorialDTO factorialDTO){
-        log.info("Created: {}", factorialDTO);
-        return Mono.just(factorialDTO);
+        return factorialRepository
+                .save(Factorial.fromDTO(factorialDTO))
+                .map(FactorialDTO::fromFactorial)
+                .doOnSuccess(factorial -> log.info("Created: {}", factorial))
+                .doOnError(ex -> log.error("Error during factorial creation: {}", ex.getMessage()));
     }
 
     public Mono<FactorialDTO> getFactorialRequestById(String id){
-        return Mono.just(new FactorialDTO(id, 1000));
+        return factorialRepository
+                .findById(id)
+                .map(FactorialDTO::fromFactorial);
     }
+
 }
