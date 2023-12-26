@@ -14,5 +14,18 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1'
-          memory: '1000M'
+          cpus: '0.5'
+          memory: '256M'
+
+  queue:
+    image: rabbitmq:3.12-management
+    container_name: queue
+    ports:
+      - "5672:5672"
+      - "8081:15672"
+      - "25676:25676"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
