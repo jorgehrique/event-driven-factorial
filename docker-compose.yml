@@ -20,6 +20,9 @@ services:
   queue:
     image: rabbitmq:3.12-management
     container_name: queue
+    volumes:
+      - ./rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+      - ./rabbitmq-definitions.json:/etc/rabbitmq/definitions.json:ro
     ports:
       - "5672:5672"
       - "8081:15672"
