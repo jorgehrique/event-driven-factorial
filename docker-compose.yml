@@ -33,6 +33,32 @@ services:
           cpus: '0.5'
           memory: '256M'
 
+  factorial-service:
+    image: calcltda/factorial-service:0.0.1
+    container_name: factorial-service
+    ports:
+      - "8085:8085"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+    depends_on:
+      - database
+      - queue
+
+  factorial-worker:
+    image: calcltda/factorial-worker:0.0.1
+    container_name: factorial-worker
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+    depends_on:
+      - database
+      - queue
+
 #  pgadmin:
 #    image: elestio/pgadmin:latest
 #    environment:
