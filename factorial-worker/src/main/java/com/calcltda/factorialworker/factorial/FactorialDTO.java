@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public record FactorialDTO(
         long id,
-        int number
+        Integer number,
+        FactorialStatus status
 ) implements Serializable {
 
 }

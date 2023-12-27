@@ -9,13 +9,17 @@ public record FactorialDTO(
         long id,
         @NotNull
         @Range(min = 1, max = 99)
-        long number
+        Integer number,
+        String result,
+        FactorialStatus status
 
 ) implements Serializable {
     public static FactorialDTO fromFactorial(Factorial factorial){
         return new FactorialDTO(
                 factorial.id(),
-                factorial.number()
+                factorial.number(),
+                factorial.result(),
+                FactorialStatus.valueOf(factorial.status())
         );
     }
 }

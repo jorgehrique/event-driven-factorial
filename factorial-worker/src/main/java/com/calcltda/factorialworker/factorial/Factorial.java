@@ -1,7 +1,9 @@
-package com.calcltda.factorialservice.factorial;
+package com.calcltda.factorialworker.factorial;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.math.BigInteger;
 
 @Table("TB_FACTORIAL")
 public record Factorial(
@@ -11,7 +13,5 @@ public record Factorial(
         String result,
         String status
 ) {
-    public static Factorial newFactorial(FactorialDTO factorialDTO){
-        return new Factorial(null, factorialDTO.number(), null, FactorialStatus.PROCESSING.name());
-    }
+
 }

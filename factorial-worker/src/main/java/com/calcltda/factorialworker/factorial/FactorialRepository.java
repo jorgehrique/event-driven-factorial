@@ -1,4 +1,4 @@
-package com.calcltda.factorialservice.factorial;
+package com.calcltda.factorialworker.factorial;
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;

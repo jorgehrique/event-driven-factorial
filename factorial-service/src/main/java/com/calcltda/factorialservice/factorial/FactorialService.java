@@ -28,7 +28,7 @@ public class FactorialService {
                 .doOnError(ex -> log.error("Error during factorial creation: {}", ex.getMessage()));
     }
 
-    public Mono<FactorialDTO> getFactorialRequestById(String id){
+    public Mono<FactorialDTO> getFactorialRequestById(Long id){
         return factorialRepository
                 .findById(id)
                 .map(FactorialDTO::fromFactorial);

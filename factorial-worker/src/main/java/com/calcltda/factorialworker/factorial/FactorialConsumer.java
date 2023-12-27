@@ -20,8 +20,18 @@ public class FactorialConsumer {
     @RabbitListener(queues = "factorial-queue")
     void consumer(FactorialDTO factorialDTO){
         log.info("Initiating processing: {}", factorialDTO);
+
         BigInteger result = factorialService.calculateFactorial(factorialDTO.number());
-        log.info("Finalized processing {}: {}.", factorialDTO.number(), result);
+
+        Factorial factorial = new Factorial(
+                factorialDTO.id(),
+                factorialDTO.number(),
+                result.toString(),
+                FactorialStatus.DONE.name());
+
+        Factorial inserted = factorialService.updateFactorial(factorial).block();
+
+        log.info("Finalized processing: {}", inserted);
     }
 
 }

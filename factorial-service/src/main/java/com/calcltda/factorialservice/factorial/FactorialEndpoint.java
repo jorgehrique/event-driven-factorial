@@ -27,7 +27,7 @@ public class FactorialEndpoint {
     }
 
     @GetMapping("/{id}")
-    public Mono<FactorialDTO> getFactorialRequestById(@PathVariable String id){
+    public Mono<FactorialDTO> getFactorialRequestById(@PathVariable Long id){
         return factorialService.getFactorialRequestById(id);
     }
 }

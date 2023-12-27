@@ -2,11 +2,18 @@ package com.calcltda.factorialworker.factorial;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.math.BigInteger;
 
 @Service
 public class FactorialService {
+
+    private final FactorialRepository factorialRepository;
+
+    public FactorialService(FactorialRepository factorialRepository) {
+        this.factorialRepository = factorialRepository;
+    }
 
     @Value("${factorial-worker.calm-down-ms}")
     private long calmDownMS; // adding some difficult ;)
@@ -26,4 +33,7 @@ public class FactorialService {
         return result;
     }
 
+    public Mono<Factorial> updateFactorial(Factorial factorial){
+        return factorialRepository.save(factorial);
+    }
 }
