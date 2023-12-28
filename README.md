@@ -46,3 +46,17 @@ docker-compose up
 [//]: # (kubectl apply -f -all k8s/)
 
 [//]: # (```)
+
+## Load tests
+
+The load tests as writeen with Grafana K6 and the content is on the k6 folder. 
+
+### Docker compose
+
+Assuming that are you running this project with docker compose, you can run the tests with the following command:
+
+```
+cat k6/script.js | docker run --rm -i --network=event-driven-factorial_fnet grafana/k6 run -
+```
+
+That will up a k6 container and do mass calls to the factorial request endpoint
