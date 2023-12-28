@@ -16,6 +16,8 @@ services:
         limits:
           cpus: '0.5'
           memory: '256M'
+    networks:
+      - fnet
 
   queue:
     image: rabbitmq:3.12-management
@@ -32,6 +34,8 @@ services:
         limits:
           cpus: '0.5'
           memory: '256M'
+    networks:
+      - fnet
 
   factorial-service:
     image: calcltda/factorial-service:0.0.1
@@ -46,6 +50,8 @@ services:
     depends_on:
       - database
       - queue
+    networks:
+      - fnet
 
   factorial-worker:
     image: calcltda/factorial-worker:0.0.1
@@ -58,6 +64,11 @@ services:
     depends_on:
       - database
       - queue
+    networks:
+      - fnet
+
+networks:
+  fnet:
 
 #  pgadmin:
 #    image: elestio/pgadmin:latest
