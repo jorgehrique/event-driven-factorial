@@ -51,12 +51,22 @@ docker-compose up
 
 The load tests as writeen with Grafana K6 and the content is on the k6 folder. 
 
+The test will send _n_ requests to factorial-service, that will create _n_ messages in the queue. After that, will
+do a request to verify if the request was really created. Then will wait for 60 seconds e wil do _n_ requests to check
+if the processes status was done.
+
+At this point, each factorial-worker instance can handle 50 factorials per minute.
+
 ### Docker compose
 
-Assuming that are you running this project with docker compose, you can run the tests with the following command:
+Assuming that are you running this project with docker compose, you can run the tests with the following commands
 
+- Create the load test image:
 ```
-cat k6/script.js | docker run --rm -i --network=event-driven-factorial_fnet grafana/k6 run -
+ docker build -t calcltda/load-test:0.0.1 k6
 ```
 
-That will up a k6 container and do mass calls to the factorial request endpoint
+- Run the load test:
+```
+  docker run --network=event-driven-factorial_fnet calcltda/load-test:0.0.1
+```
