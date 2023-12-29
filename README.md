@@ -1,6 +1,6 @@
 # Event-driven Factorial
 
-Educational proprose system to process multiple requests to calculate factorial.<br>
+Educational propose system to process multiple requests to calculate factorial.<br>
 I use this repo to learn and validate a lot of things like load tests, optimizations and autoscaling.
 
 ## Getting Started

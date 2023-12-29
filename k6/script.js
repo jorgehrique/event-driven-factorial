@@ -44,7 +44,7 @@ export function request_factorial_scenario () {
     const id = factorialCreationResponse.json('id');
 
     // Check if the new factorial was persisted consistently
-    const factorialConfirmResponse = http.get(`${url}/${id}`, payload, params);
+    const factorialConfirmResponse = http.get(`${url}/${id}`, params);
     check(factorialConfirmResponse, {
         'is status 200': (r) => r.status === 200,
         'is factorial status in [PROCESSING, DONE]': (r) =>
@@ -54,7 +54,7 @@ export function request_factorial_scenario () {
     sleep(60); // 1 minute
 
     // Check if the load was processed in 1 minute
-    const factorialDoneResponse = http.get(`${url}/${id}`, payload, params);
+    const factorialDoneResponse = http.get(`${url}/${id}`, params);
     check(factorialDoneResponse, {
         'is status 200': (r) => r.status === 200,
         'is factorial status is DONE': (r) => r.json('status') === 'DONE',
