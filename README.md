@@ -52,10 +52,10 @@ docker-compose up
 The load tests as writeen with Grafana K6 and the content is on the k6 folder. 
 
 The test will send _n_ requests to factorial-service, that will create _n_ messages in the queue. After that, will
-do a request to verify if the request was really created. Then will wait for 60 seconds e wil do _n_ requests to check
-if the processes status was done.
+do a request to verify if the request was really created. Then will wait for 60 seconds and will do _n_ requests to check
+if the processes status was done. Default _n_ is 50.
 
-At this point, each factorial-worker instance can handle 50 factorials per minute.
+At this point, each factorial-worker instance can handle 50 factorials per minute. (with 20 ms in calm down config)
 
 ### Docker compose
 
